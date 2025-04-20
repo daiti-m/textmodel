@@ -1,3 +1,2 @@
 # textmodel
-Repository for a coming book "Statistical Text Model" from Iwanami Shoten Publishers.
-
+岩波書店より発売予定の『統計的テキストモデル』のサポートページです. 
