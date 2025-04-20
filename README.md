@@ -1,2 +1,3 @@
 # textmodel
-Repository for a coming book "Text Model" from Iwanami.
+Repository for a coming book "Statistical Text Model" from Iwanami Shoten Publishers.
+
