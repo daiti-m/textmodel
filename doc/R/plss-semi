@@ -1,0 +1,34 @@
+#!/bin/sh
+#
+#    plss-semi: Probabilistic Latent Semantic Scaling, semi-supervised learning.
+#    $Id: plss-semi,v 1.3 2024/04/18 19:49:54 daichi Exp $
+#
+R=$HOME/work/iwanami/doc/R
+BIN=$HOME/work/iwanami/doc/bin
+TMPVEC=/tmp/wordvec-$$.vec
+
+usage () 
+{
+    echo "usage: % plss-semi target.txt positive.id negative.id wordvecs.vec output"
+    echo "\$Id: plss-semi,v 1.3 2024/04/18 19:49:54 daichi Exp $"
+    exit 0
+}
+
+if [ $# -lt 5 ]; then
+    usage
+fi
+trap "rm -f $TMPVEC; exit 1" 2 3 9 15
+
+TEXT=$1
+POSITIVE=$2
+NEGATIVE=$3
+WORDVEC=$4
+OUTPUT=$5
+
+echo "preparing word vectors.."
+$BIN/sieve-vectors.awk $TEXT $WORDVEC > $TMPVEC
+echo "running PLSS-semi.."
+$R/plss-semi.R --positives=`cat $POSITIVE` --negatives=`cat $NEGATIVE` \
+$TEXT $TMPVEC $OUTPUT
+
+rm -f $TMPVEC

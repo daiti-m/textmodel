@@ -1,0 +1,32 @@
+#!/bin/sh
+#
+#    plss: Probabilistic Latent Semantic Scaling.
+#    $Id: plss,v 1.2 2024/04/18 19:58:21 daichi Exp $
+#
+R=$HOME/work/iwanami/doc/R
+BIN=$HOME/work/iwanami/doc/bin
+TMPVEC=/tmp/wordvec-$$.vec
+
+usage ()
+{
+    echo "usage: plss target.txt posneg.dic wordvecs.vec output"
+    echo "\$Id: plss,v 1.2 2024/04/18 19:58:21 daichi Exp $"
+    exit 0
+}
+
+if [ $# -lt 4 ]; then
+    usage
+fi
+trap "rm -f $TMPVEC; exit 1" 2 3 9 15
+
+TEXT=$1
+POSNEG=$2
+WORDVEC=$3
+OUTPUT=$4
+
+echo "preparing word vectors.."
+$BIN/sieve-vectors.awk $TEXT $WORDVEC > $TMPVEC
+echo "running PLSS.."
+$R/plss.R $TEXT $POSNEG $TMPVEC $OUTPUT
+
+rm -f $TMPVEC

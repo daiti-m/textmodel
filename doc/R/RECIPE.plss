@@ -1,0 +1,20 @@
+% sieve-vectors.awk ../data/wrime.txt ../model/jawiki.vec > ../model/jawiki.wrime.vec
+% rdssave.R ../model/jawiki.wrime.vec ../model/jawiki.wrime.rds
+
+% awk -F"\t" '{print $2}' wrime.test | awk 'NF>=20' > wrime.20+.test
+
+crocus:~/work/../doc/bin% ./plss.R ../data/wrime.20+.test ../data/posneg.ja ../model/jawiki.wrime.rds wrime
+loading wordvectors from ../model/jawiki.wrime.rds.. done.
+preparing data.. done.
+documents = 302, vocabulary = 2772
+computing theta..
+computing 302/302.. done.
+theta written to wrime.theta.
+phi written to wrime.phi.
+
+% paste ../data/wrime.20+.test.label wrime.theta ../data/wrime.20+.test > wrime.result
+% sort -k2 -nr wrime.result 
+
+
+
+

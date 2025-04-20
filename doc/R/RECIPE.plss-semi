@@ -1,0 +1,14 @@
+% diet-split.py *.txt | diet-format.py > ../2023-education.dat
+% diet-sieve.awk 2023-education.formatted.dat | cut -f 2 | mecab -O wakati -b 65536 \
+  > 2023-education.txt                               
+% diet-sieve.awk 2023-education.formatted.dat | cut -f 1 > 2023-education.label
+
+% sieve-vectors.awk ../data/diet/2023-education.txt ../model/jawiki.vec > ../model/jawiki.education.vec
+% sieve-vectors.awk ../data/diet/2023-defense.txt ../model/jawiki.vec > ../model/jawiki.defense.vec 
+
+% article-id.py 2023-education.label 柚木 20 > yuzuki.id          
+% article-id.py 2023-education.label 西岡 20 > nishioka.id
+
+% plss-semi.R --positives=`cat ../data/diet/yuzuki.id` --negatives=`cat ../data/diet/nishioka.id` ../data/diet/2023-education.txt ../model/jawiki.education.vec out
+
+% paste out.theta ../data/diet/2023-education.label ../data/diet/2023-education.txt | sed 's/ //g' | awk '{print substr($0, 0, 55)}' | sort -nr 
