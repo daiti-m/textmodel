@@ -106,8 +106,8 @@ def eprintf (s,clear=True):
     sys.stderr.flush ()
 
 def usage ():
-    print ('usage: % phrase.py input output passes [threshold] [minfreq]')
-    print ('$Id: phrase.py,v 1.1 2021/04/29 00:44:47 daichi Exp $')
+    print ('usage: % phraser.py input output passes [threshold] [minfreq]')
+    print ('$Id: phraser.py,v 1.1 2021/04/29 00:44:47 daichi Exp $')
     sys.exit (0)
 
 def main ():

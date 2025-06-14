@@ -23,7 +23,7 @@ def normalize (x):
 
 def usage ():
     print ('usage: % vcovariance.py words.vec [output] [colormap]')
-    print ('$Id: vcovariance.py,v 1.5 2022/07/28 11:47:59 daichi Exp $')
+    print ('$Id: vcovariance.py,v 1.6 2024/11/17 12:36:01 daichi Exp $')
     sys.exit (0)
 
 def main ():
@@ -35,18 +35,16 @@ def main ():
         colormap = sys.argv[3] if len(sys.argv) > 3 else 'seismic'
     matrix,words = loadvec (file)
     putil.fontsize (20)
-    # V = np.dot (matrix.T, matrix) / matrix.shape[0]
-    # imshow (V, interpolation='none', cmap=colormap, vmin=-0.4, vmax=0.4)
     V = np.dot (matrix.T, matrix)
-    imshow (V, interpolation='none', cmap='seismic', vmin=-1, vmax=1)
-    xlabel (' dimension', labelpad=6)
-    ylabel ('dimension', labelpad=3)
+    imshow (V, interpolation='none', cmap=colormap, vmin=-1, vmax=1)
+    xlabel ('   Dim', labelpad=7, fontsize=22)
+    ylabel ('Dim', labelpad=22, fontsize=22, rotation=0)
     xticks (np.arange(0,120,20))
     yticks (np.arange(0,120,20))
     putil.margins (left=0.1, bottom=0.2)
     colorbar ()
     if output is not None:
-        putil.savefig (output, dpi=200)
+        putil.savefig (output, dpi=300)
     show ()
 
 if __name__ == "__main__":

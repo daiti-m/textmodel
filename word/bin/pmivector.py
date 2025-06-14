@@ -1,7 +1,7 @@
 #!/usr/local/bin/python
 #
-#    wordvector.py
-#    $Id: wordvector.py,v 1.1 2020/09/15 12:16:07 daichi Exp $
+#    pmivector.py
+#    $Id: pmivector.py,v 1.2 2024/10/31 01:50:34 daichi Exp $
 #    computing word vector through a simple sparse SVD.
 #
 
@@ -51,7 +51,7 @@ def parse (file, dic, width, k=1, alpha=0.75):
             if re.match(r'^[ \t\n]*$', line):
                 continue
             lines += 1
-            if (lines % 100) == 0:
+            if (lines % 1000) == 0:
                 eprintf ('processing lines %3d..\r' % lines)
             # count
             words = line.rstrip('\n').split()
@@ -82,6 +82,7 @@ def parse (file, dic, width, k=1, alpha=0.75):
                 col.append (w)
     eprintf ('creating sparse matrix %4d/%d..\n' % (V,V))
     # create sparse matrix
+    eprintf ('creating COO matrix..\n')
     X = coo_matrix ((data, (row, col)))
     return X
 
@@ -135,14 +136,14 @@ def save (vectors, file, dic):
             vec = vectors[v]
             fh.write ('%s\t' % idword[v])
             for k in range(K):
-                fh.write ('%.5g%s' % (vec[k], ' ' if k < K-1 else '\n'))
+                fh.write ('% .05f%s' % (vec[k], ' ' if k < K-1 else '\n'))
 
 def norm (x):
     return sqrt (np.dot(x,x))
     
 def usage ():
-    print ('usage: wordvector.py OPTIONS train model')
-    print ('$Id: wordvector.py,v 1.1 2020/09/15 12:16:07 daichi Exp $')
+    print ('usage: pmivector.py OPTIONS train model')
+    print ('$Id: pmivector.py,v 1.2 2024/10/31 01:50:34 daichi Exp $')
     print ('OPTIONS')
     print ('-K dimensions number of word vector dimensions')
     print ('-w width      width of coocurrence window (before and after)')

@@ -1,4 +1,4 @@
-#!/usr/local/bin/python2
+#!/usr/local/bin/python
 #
 #    dirichlet.py
 #    drawing a multinomial from Dirichlet distribution.

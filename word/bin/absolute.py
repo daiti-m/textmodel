@@ -25,8 +25,8 @@ def plot_data (data):
     plot (xx, xx, color='k', linestyle='--')
     xticks (xx)
     yticks (xx)
-    xlabel ('$n$', fontsize=28, labelpad=5)
-    ylabel ('$\mathrm{\mathbb{E}}[n]$', fontsize=28, rotation=0, labelpad=29)
+    xlabel (r'$n$', fontsize=28, labelpad=5)
+    ylabel (r'$\mathrm{\mathbb{E}}[n]$', fontsize=28, rotation=0, labelpad=29)
 
 def stat (first, second):
     data = {}

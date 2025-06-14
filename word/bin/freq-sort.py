@@ -1,4 +1,4 @@
-#!/usr/local/bin/python2
+#!/usr/local/bin/python
 #
 #    freq.py
 #    plots frequency distribution.
@@ -26,7 +26,7 @@ def count_freq (file):
     freq = defaultdict (int)
     with open (file, 'r') as fh:
         for line in fh:
-            words = line.rstrip('\verb|\|n').split()
+            words = line.rstrip('\n').split()
             for word in words:
                 freq[word] += 1
     return freq
